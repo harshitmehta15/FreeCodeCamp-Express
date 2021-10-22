@@ -5,6 +5,13 @@ var app = express();
 
 console.log("Hello World");
 
+//Middleware - for root - above everyone
+app.use(function middleware(req, res, next) {
+    console.log(`${req.method} ${req.path} - ${req.ip}`);
+    next();
+  });
+
+
 app.get("/",(req,res)=>{
     const absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
@@ -20,10 +27,6 @@ app.get("/json",(req,res)=>{
     }
 });
 
-app.use(function middleware(req, res, next) {
-    console.log(`${req.method} ${req.path} - ${req.ip}`)
-    next();
-  });
 
 
 
