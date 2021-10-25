@@ -35,9 +35,18 @@ app.get('/now',(req,res,next) => {
     res.json({"time": req.time});
 });
 
+//Accessing URL Params and returning the request accordingly 
 app.get('/:word/echo',(req,res) => {
     res.json({"echo" :req.params.word});
 });
+
+//Query Params
+app.get('/name',(req,res) => {
+    const fullName = req.query['first'] + ' ' + req.query['last'];
+    res.json({name : fullName});
+});
+// could have also done it in the chaining fashion  
+// app.route(path).get(handler).post(handler)
 
 
 
