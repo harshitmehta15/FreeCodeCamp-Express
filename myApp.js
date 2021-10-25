@@ -1,11 +1,16 @@
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
+
 //npm install dotenv for local environment varibles
 //require('dotenv').config();
 
 console.log("Hello World");
 
-//Middleware - for root - above every route function
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+//Middleware - for root - above every route function with app.USE
 app.use(function middleware(req, res, next) {
     console.log(`${req.method} ${req.path} - ${req.ip}`);
     next();
