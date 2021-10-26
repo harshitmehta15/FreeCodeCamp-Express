@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 console.log("Hello World");
 
+// POST METHOD MIDDLEWEAR to convert the REQ Body to JSON
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -16,6 +17,7 @@ app.use(function middleware(req, res, next) {
     next();
   });
 
+ // Serving HTML page 
 app.get("/",(req,res)=>{
     const absolutePath = __dirname + '/views/index.html';
     res.sendFile(absolutePath);
@@ -53,30 +55,13 @@ app.get('/name',(req,res) => {
 // could have also done it in the chaining fashion  
 // app.route(path).get(handler).post(handler)
 
+//POST
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+app.post('/name',(req,res) => {
+    const firstName = req.body.first;
+    const lastName = req.body.last;
+    const fullName = firstName + ' ' + lastName;
+    res.json({"name": fullName});
+});
 
  module.exports = app;
